@@ -8,6 +8,7 @@
 
 #import "SITLGalleryViewController.h"
 #import "SITLGalleryCollectionViewCell.h"
+#import "SITLGalleryDetailedViewController.h"
 
 #import "SITLFlickrFetcher.h"
 
@@ -150,5 +151,23 @@
 }
 
 #pragma mark - UICollectionViewDelegate implementation
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    SITLGalleryDetailedViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDetailedViewController"];
+
+    SITLGalleryItemModel *selectedItem = self.currentGallery.items[indexPath.row];
+    
+    detailViewController.item = selectedItem;
+    
+    detailViewController.dismissBlock = ^{
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    };
+    
+    [self presentViewController:detailViewController animated:YES completion:^{
+        
+    }];
+
+}
 
 @end
