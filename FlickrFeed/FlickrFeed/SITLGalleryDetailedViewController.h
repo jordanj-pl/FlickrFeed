@@ -12,8 +12,7 @@
 
 @interface SITLGalleryDetailedViewController : UIViewController
 
-@property (nonatomic, copy) void (^dismissBlock)(void);
-
 @property (nonatomic, strong) SITLGalleryItemModel *item;
+@property (nonatomic, assign) NSInteger itemIndex;
 
 @end

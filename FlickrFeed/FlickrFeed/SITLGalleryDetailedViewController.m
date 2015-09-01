@@ -64,10 +64,6 @@
 }
 */
 
--(IBAction)dismiss:(id)sender {
-    self.dismissBlock();
-}
-
 -(IBAction)openURL:(id)sender {
     [[UIApplication sharedApplication] openURL:self.item.webURL];
 }

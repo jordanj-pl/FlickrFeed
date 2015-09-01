@@ -9,6 +9,7 @@
 #import "SITLGalleryViewController.h"
 #import "SITLGalleryCollectionViewCell.h"
 #import "SITLGalleryDetailedViewController.h"
+#import "SITLGalleryDetailedPageViewController.h"
 
 #import "SITLFlickrFetcher.h"
 
@@ -153,6 +154,32 @@
 #pragma mark - UICollectionViewDelegate implementation
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    SITLGalleryDetailedPageViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDettailsPageViewController"];
+
+    detailViewController.gallery = self.currentGallery;
+    detailViewController.currentIndex = indexPath.row;
+    
+    detailViewController.dismissBlock = ^{
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    };
+
+    
+    SITLGalleryDetailedViewController *detailedViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDetailedViewController"];
+    
+    SITLGalleryItemModel *selectedItem = self.currentGallery.items[indexPath.row];
+    
+    detailedViewController.item = selectedItem;
+    detailedViewController.itemIndex = indexPath.row;
+
+    [detailViewController setViewControllers:@[detailedViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+
+
+    [self presentViewController:detailViewController animated:YES completion:^{
+        
+    }];
+
+    /*
     SITLGalleryDetailedViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDetailedViewController"];
 
     SITLGalleryItemModel *selectedItem = self.currentGallery.items[indexPath.row];
@@ -167,7 +194,7 @@
     [self presentViewController:detailViewController animated:YES completion:^{
         
     }];
-
+*/
 }
 
 @end
