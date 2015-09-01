@@ -47,7 +47,7 @@
     
     UIGraphicsBeginImageContextWithOptions(newRect.size, NO, 0.0);
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:4.0];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:newRect];
     
     [path addClip];
     

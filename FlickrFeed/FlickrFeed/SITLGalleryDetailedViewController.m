@@ -9,6 +9,7 @@
 #import "SITLGalleryDetailedViewController.h"
 
 #import "SITLImageStore.h"
+#import "SITLGalleryViewController.h"
 
 @interface SITLGalleryDetailedViewController ()
 
@@ -35,7 +36,26 @@
     
     SITLImageStore *imgStore = [SITLImageStore sharedStore];
     
-    self.imageView.image = [imgStore imageForKey:self.item.flickrId];
+    if([imgStore imageForKey:self.item.flickrId]) {
+        self.imageView.image = [imgStore imageForKey:self.item.flickrId];
+    } else {
+
+        if([self.parentViewController.presentingViewController isKindOfClass:[SITLGalleryViewController class]]) {
+            SITLGalleryViewController *gvc = (SITLGalleryViewController*)self.parentViewController.presentingViewController;
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [gvc.fetcher fetchImageForItem:self.item withCompletion:^(UIImage *image) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.imageView.image = [imgStore imageForKey:self.item.flickrId];
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    });
+                }];
+            });
+        }
+        
+    }
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateStyle:NSDateFormatterMediumStyle];

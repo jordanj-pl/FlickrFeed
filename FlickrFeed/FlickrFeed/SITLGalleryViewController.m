@@ -11,11 +11,8 @@
 #import "SITLGalleryDetailedViewController.h"
 #import "SITLGalleryDetailedPageViewController.h"
 
-#import "SITLFlickrFetcher.h"
-
 @interface SITLGalleryViewController ()
 
-@property (strong) SITLFlickrFetcher *fetcher;
 @property (strong) SITLGalleryModel *currentGallery;
 
 @property (strong) UIView *shakeToReloadBanner;
@@ -178,23 +175,6 @@
     [self presentViewController:detailViewController animated:YES completion:^{
         
     }];
-
-    /*
-    SITLGalleryDetailedViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDetailedViewController"];
-
-    SITLGalleryItemModel *selectedItem = self.currentGallery.items[indexPath.row];
-    
-    detailViewController.item = selectedItem;
-    
-    detailViewController.dismissBlock = ^{
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
-    };
-    
-    [self presentViewController:detailViewController animated:YES completion:^{
-        
-    }];
-*/
 }
 
 @end

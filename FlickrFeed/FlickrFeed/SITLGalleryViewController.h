@@ -8,6 +8,10 @@
 
 @import UIKit;
 
+#import "SITLFlickrFetcher.h"
+
 @interface SITLGalleryViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (strong) SITLFlickrFetcher *fetcher;
 
 @end

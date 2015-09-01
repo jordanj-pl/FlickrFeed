@@ -33,7 +33,7 @@
         <!--Gallery Detailed Page View Controller-->
         <scene sceneID="XCz-FY-0CZ">
             <objects>
-                <pageViewController storyboardIdentifier="GalleryDettailsPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="pCS-QE-88C" customClass="SITLGalleryDetailedPageViewController" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="GalleryDettailsPageViewController" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="pCS-QE-88C" customClass="SITLGalleryDetailedPageViewController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oPN-B0-Gpo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="943" y="353"/>
