@@ -14,8 +14,9 @@
 @interface SITLGalleryViewController ()
 
 @property (strong) SITLFlickrFetcher *fetcher;
-
 @property (strong) SITLGalleryModel *currentGallery;
+
+@property (strong) UIView *shakeToReloadBanner;
 
 @end
 
@@ -34,22 +35,57 @@
         self.fetcher = [[SITLFlickrFetcher alloc] init];
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.fetcher fetchGalleryForDefaultChannelWithCompletion:^(SITLGalleryModel *gallery, NSError *error) {
-            NSLog(@"XML: %@,\nERROR: %@", gallery, error);
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.currentGallery = gallery;
-                
-                [self.collectionView reloadData];
-            });
-        }];
-    });
+    self.shakeToReloadBanner = [[UIView alloc] initWithFrame:CGRectMake(30.0f, 40.0f, self.view.bounds.size.width - 60, 40.0f)];
+    self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:0.5f green:0.4f blue:0.8f alpha:0.0f];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 5.0f, self.shakeToReloadBanner.frame.size.width-40.0f, 30.0f)];
+    label.text = @"Shake to reload";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:1.0f];
+    [self.shakeToReloadBanner addSubview:label];
+    
+    [self reload];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+    
+    [self.view addSubview:self.shakeToReloadBanner];
+    [UIView animateWithDuration:1 animations:^{
+        self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:0.5f green:0.4f blue:0.8f alpha:1.0f];
+    }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
+}
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+#pragma mark - motion detection
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+
+    if(motion == UIEventSubtypeMotionShake) {
+        [UIView animateWithDuration:3 animations:^{
+            self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:120.0f green:120.0f blue:200.0f alpha:0.0f];
+        } completion:^(BOOL finished) {
+            if(finished) {
+                [self.shakeToReloadBanner removeFromSuperview];
+            }
+        }];
+
+        [self reload];
+    }
 }
 
 /*
@@ -62,6 +98,25 @@
 }
 */
 
+#pragma mark - network interaction
+
+-(void)reload {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.fetcher fetchGalleryForDefaultChannelWithCompletion:^(SITLGalleryModel *gallery, NSError *error) {
+            NSLog(@"XML: %@,\nERROR: %@", gallery, error);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.currentGallery = gallery;
+                
+                [self.collectionView reloadData];
+                
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            });
+        }];
+    });
+}
 
 #pragma mark - UICollectionViewDataSource implementation
 
