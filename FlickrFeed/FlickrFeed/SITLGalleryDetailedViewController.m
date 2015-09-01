@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *authorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIButton *openURLButton;
 
 @end
 
@@ -43,6 +44,9 @@
     self.titleLabel.text = self.item.title;
     self.authorLabel.text = self.item.author.name;
     self.dateLabel.text = [df stringFromDate:self.item.datePublished];
+    
+    [self.openURLButton setTitle:[self.item.webURL absoluteString] forState:UIControlStateNormal];
+    self.openURLButton.hidden = ![[UIApplication sharedApplication] canOpenURL:self.item.webURL];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +66,10 @@
 
 -(IBAction)dismiss:(id)sender {
     self.dismissBlock();
+}
+
+-(IBAction)openURL:(id)sender {
+    [[UIApplication sharedApplication] openURL:self.item.webURL];
 }
 
 @end
