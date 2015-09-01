@@ -20,6 +20,7 @@
 		1768DE411B949A180042F762 /* SITLGalleryItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1768DE401B949A180042F762 /* SITLGalleryItemModel.m */; };
 		1768DE441B950B1D0042F762 /* SITLGalleryAuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1768DE431B950B1D0042F762 /* SITLGalleryAuthorModel.m */; };
 		1768DE471B95DF7B0042F762 /* SITLGalleryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1768DE461B95DF7B0042F762 /* SITLGalleryCollectionViewCell.m */; };
+		17F141A11B95EA6700C5D08D /* SITLImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F141A01B95EA6700C5D08D /* SITLImageStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		1768DE431B950B1D0042F762 /* SITLGalleryAuthorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SITLGalleryAuthorModel.m; sourceTree = "<group>"; };
 		1768DE451B95DF7B0042F762 /* SITLGalleryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SITLGalleryCollectionViewCell.h; sourceTree = "<group>"; };
 		1768DE461B95DF7B0042F762 /* SITLGalleryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SITLGalleryCollectionViewCell.m; sourceTree = "<group>"; };
+		17F1419F1B95EA6700C5D08D /* SITLImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SITLImageStore.h; sourceTree = "<group>"; };
+		17F141A01B95EA6700C5D08D /* SITLImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SITLImageStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				1768DE0B1B9483440042F762 /* Supporting Files */,
 				1768DE321B9484060042F762 /* SITLGalleryViewController.h */,
 				1768DE331B9484060042F762 /* SITLGalleryViewController.m */,
+				17F1419F1B95EA6700C5D08D /* SITLImageStore.h */,
+				17F141A01B95EA6700C5D08D /* SITLImageStore.m */,
 			);
 			path = FlickrFeed;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 				1768DE341B9484060042F762 /* SITLGalleryViewController.m in Sources */,
 				1768DE3A1B948C2D0042F762 /* SITLFlickrFetcher.m in Sources */,
 				1768DE411B949A180042F762 /* SITLGalleryItemModel.m in Sources */,
+				17F141A11B95EA6700C5D08D /* SITLImageStore.m in Sources */,
 				1768DE0E1B9483440042F762 /* main.m in Sources */,
 				1768DE471B95DF7B0042F762 /* SITLGalleryCollectionViewCell.m in Sources */,
 				1768DE3E1B949A000042F762 /* SITLGalleryModel.m in Sources */,
@@ -476,6 +482,7 @@
 				1768DE2D1B9483440042F762 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1768DE2E1B9483440042F762 /* Build configuration list for PBXNativeTarget "FlickrFeedTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +491,7 @@
 				1768DE301B9483440042F762 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

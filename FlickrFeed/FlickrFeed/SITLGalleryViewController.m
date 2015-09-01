@@ -79,6 +79,18 @@
     cell.title.text = item.title;
     cell.author.text = item.author.name;
     
+    if(item.thumbnail) {
+        cell.image.image = item.thumbnail;
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [self.fetcher fetchImageForItem:item withCompletion:^(UIImage *thumbnail) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.image.image = thumbnail;
+                });
+            }];
+        });
+    }
+    
     return cell;
 }
 

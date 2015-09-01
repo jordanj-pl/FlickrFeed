@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jordan Jasinski. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SITLGalleryCollectionViewCell : UICollectionViewCell
 

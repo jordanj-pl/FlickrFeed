@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jordan Jasinski. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface SITLGalleryAuthorModel : NSObject
 

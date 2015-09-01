@@ -10,4 +10,10 @@
 
 @implementation SITLGalleryCollectionViewCell
 
+-(void)prepareForReuse {
+    self.author.text = @"";
+    self.title.text = @"";
+    self.image.image = nil;
+}
+
 @end

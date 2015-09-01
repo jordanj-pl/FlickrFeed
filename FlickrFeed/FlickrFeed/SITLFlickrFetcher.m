@@ -8,6 +8,8 @@
 
 #import "SITLFlickrFetcher.h"
 
+#import "SITLImageStore.h"
+
 @interface SITLFlickrFetcher () <NSXMLParserDelegate>
 
 @property (strong) NSMutableDictionary *metadataDict;
@@ -59,6 +61,28 @@
         }
     }
     
+}
+
+-(void)fetchImageForItem:(SITLGalleryItemModel *)item withCompletion:(void (^)(UIImage *))completion {
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:item.imageURL];
+    NSError *error = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:NULL error:&error];
+    
+    if(data) {
+        UIImage *image = [UIImage imageWithData:data];
+        
+        [item setThumbnailFromImage:image];
+        
+        SITLImageStore *imgStore = [SITLImageStore sharedStore];
+        [imgStore setImage:image forKey:item.flickrId];
+        
+        if(completion) {
+            completion(item.thumbnail);
+        }
+    }
+
 }
 
 #pragma mark - XMLParserDelegate

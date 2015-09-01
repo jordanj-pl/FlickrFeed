@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jordan Jasinski. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 #import "SITLGalleryAuthorModel.h"
 
@@ -19,10 +19,13 @@
 @property (strong, readonly) NSDate *datePublished;
 @property (strong, readonly) NSDate *dateUpdated;
 @property (strong, readonly) NSURL *imageURL;
+@property (strong, readonly) UIImage *thumbnail;
 @property (strong, readonly) NSURL *webURL;
 
 @property (strong, readonly) SITLGalleryAuthorModel *author;
 
 -(instancetype)initWithDictionary:(NSDictionary*)dictionary andAuthor:(SITLGalleryAuthorModel*)author;
+
+-(void)setThumbnailFromImage:(UIImage*)image;
 
 @end

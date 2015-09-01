@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 Jordan Jasinski. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 #import "SITLGalleryModel.h"
 
 @interface SITLFlickrFetcher : NSObject
 
 -(void)fetchGalleryForDefaultChannelWithCompletion:(void(^)(SITLGalleryModel *gallery, NSError *error))completion;
+
+-(void)fetchImageForItem:(SITLGalleryItemModel*)item withCompletion:(void(^)(UIImage *image))completion;
 
 @end

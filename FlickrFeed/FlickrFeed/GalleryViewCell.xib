@@ -24,6 +24,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="shadowOffset" width="1" height="1"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f88-7U-MvR">
                         <rect key="frame" x="8" y="121" width="134" height="21"/>
@@ -33,11 +35,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="shadowOffset" width="1" height="1"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.027309026569128036" green="0.26313439011573792" blue="0.68144071102142334" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="f88-7U-MvR" secondAttribute="bottom" constant="8" id="4Ye-Mn-rfh"/>
                 <constraint firstItem="ZQa-AL-tlc" firstAttribute="leading" secondItem="wTv-qO-diG" secondAttribute="leading" constant="8" id="5Wg-NO-n8M"/>
