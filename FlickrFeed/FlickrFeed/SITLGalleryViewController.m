@@ -30,6 +30,9 @@
     UINib *galleryItemViewNib = [UINib nibWithNibName:@"GalleryViewCell" bundle:nil];
     [self.collectionView registerNib:galleryItemViewNib forCellWithReuseIdentifier:@"GalleryItemCell"];
     
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+    self.collectionView.contentInset = UIEdgeInsetsMake(statusBarFrame.size.height, 0, 0, 0);
+    
     if(!self.fetcher) {
         self.fetcher = [[SITLFlickrFetcher alloc] init];
     }
