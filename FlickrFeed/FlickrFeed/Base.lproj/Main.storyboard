@@ -15,11 +15,36 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5pn-d0-XiZ">
                             <size key="itemSize" width="155" height="100"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="44"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells/>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="SearchBarCell" id="0BJ-b6-6ZC">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" placeholder="#tag" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mup-Rg-vXI">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="qxO-Y5-XaI"/>
+                                    </constraints>
+                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                    <connections>
+                                        <outlet property="delegate" destination="RBt-Xl-SoP" id="DYf-IL-38s"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailingMargin" secondItem="Mup-Rg-vXI" secondAttribute="trailing" constant="-8" id="GrD-P7-HXT"/>
+                                <constraint firstItem="Mup-Rg-vXI" firstAttribute="top" secondItem="0BJ-b6-6ZC" secondAttribute="topMargin" constant="-8" id="ftu-A8-CvP"/>
+                                <constraint firstItem="Mup-Rg-vXI" firstAttribute="leading" secondItem="0BJ-b6-6ZC" secondAttribute="leadingMargin" constant="-8" id="y5l-lz-U92"/>
+                            </constraints>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="RBt-Xl-SoP" id="mws-ir-gcz"/>
                             <outlet property="delegate" destination="RBt-Xl-SoP" id="cf9-nC-URQ"/>

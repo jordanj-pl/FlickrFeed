@@ -11,11 +11,13 @@
 #import "SITLGalleryDetailedViewController.h"
 #import "SITLGalleryDetailedPageViewController.h"
 
-@interface SITLGalleryViewController ()
+@interface SITLGalleryViewController ()<UISearchBarDelegate>
 
 @property (strong) SITLGalleryModel *currentGallery;
 
 @property (strong) UIView *shakeToReloadBanner;
+
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -29,7 +31,7 @@
     //Assign nib containing view for primary type of cell
     UINib *galleryItemViewNib = [UINib nibWithNibName:@"GalleryViewCell" bundle:nil];
     [self.collectionView registerNib:galleryItemViewNib forCellWithReuseIdentifier:@"GalleryItemCell"];
-    
+
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     self.collectionView.contentInset = UIEdgeInsetsMake(statusBarFrame.size.height, 0, 0, 0);
     
@@ -37,7 +39,8 @@
         self.fetcher = [[SITLFlickrFetcher alloc] init];
     }
     
-    self.shakeToReloadBanner = [[UIView alloc] initWithFrame:CGRectMake(30.0f, 40.0f, self.view.bounds.size.width - 60, 40.0f)];
+    //show hint informing user that gallery can be reloaded by shaking the device
+    self.shakeToReloadBanner = [[UIView alloc] initWithFrame:CGRectMake(30.0f, 70.0f, self.view.bounds.size.width - 60, 40.0f)];
     self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:0.5f green:0.4f blue:0.8f alpha:0.0f];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 5.0f, self.shakeToReloadBanner.frame.size.width-40.0f, 30.0f)];
     label.text = @"Shake to reload";
@@ -57,6 +60,15 @@
     [UIView animateWithDuration:1 animations:^{
         self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:0.5f green:0.4f blue:0.8f alpha:1.0f];
     }];
+    
+    [UIView animateWithDuration:2.0f delay:5.0f options:0 animations:^{
+        self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:0.5f green:0.4f blue:0.8f alpha:0.0f];
+    } completion:^(BOOL finished) {
+        if(finished) {
+            [self.shakeToReloadBanner removeFromSuperview];
+        }
+    }];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -116,7 +128,7 @@
                 self.currentGallery = gallery;
                 
                 [self.collectionView reloadData];
-                
+
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             });
         }];
@@ -136,7 +148,7 @@
                 self.currentGallery = gallery;
                 
                 [self.collectionView reloadData];
-                
+
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             });
         }];
@@ -173,6 +185,13 @@
     }
     
     return cell;
+}
+
+-(UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionReusableView *reuableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SearchBarCell" forIndexPath:indexPath];
+    
+    return reuableView;
 }
 
 #pragma mark - UICollectionViewDelegate implementation
@@ -215,6 +234,17 @@
     [self presentViewController:detailViewController animated:YES completion:^{
         
     }];
+}
+
+#pragma mark - UISearchBarDelegate implementation
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self fetchByTag:searchBar.text];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar setText:@""];
+    [self reload];
 }
 
 @end
