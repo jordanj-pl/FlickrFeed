@@ -31,9 +31,6 @@
     //Assign nib containing view for primary type of cell
     UINib *galleryItemViewNib = [UINib nibWithNibName:@"GalleryViewCell" bundle:nil];
     [self.collectionView registerNib:galleryItemViewNib forCellWithReuseIdentifier:@"GalleryItemCell"];
-
-    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-    self.collectionView.contentInset = UIEdgeInsetsMake(statusBarFrame.size.height, 0, 0, 0);
     
     if(!self.fetcher) {
         self.fetcher = [[SITLFlickrFetcher alloc] init];
@@ -48,6 +45,8 @@
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:1.0f];
     [self.shakeToReloadBanner addSubview:label];
+    
+    self.navigationItem.title = self.title;
     
     [self reload];
 }
@@ -120,6 +119,8 @@
     //TODO replace with user blocking activity indicator in order to prevent action while items are being fetch. Clearly communicate to user that new items are being downloaded, many people do not see the small status bar spinning icon.
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    self.navigationItem.title = self.title;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.fetcher fetchGalleryForDefaultChannelWithCompletion:^(SITLGalleryModel *gallery, NSError *error) {
             NSLog(@"XML: %@,\nERROR: %@", gallery, error);
@@ -139,6 +140,8 @@
     //TODO replace with user blocking activity indicator in order to prevent action while items are being fetch. Clearly communicate to user that new items are being downloaded, many people do not see the small status bar spinning icon.
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"#%@", tag];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.fetcher fetchGalleryByTag:tag withCompletion:^(SITLGalleryModel *gallery, NSError *error) {

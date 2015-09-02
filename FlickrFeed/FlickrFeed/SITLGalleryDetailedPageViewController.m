@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     UIButton *dismissBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [dismissBtn setFrame:CGRectMake(0.0f, 30, 60, 30)];//TODO add constraints to make it flexible and align to the right
     [dismissBtn setTitle:@"close" forState:UIControlStateNormal];
