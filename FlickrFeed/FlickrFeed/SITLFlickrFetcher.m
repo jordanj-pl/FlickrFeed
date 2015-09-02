@@ -19,6 +19,7 @@
 @property (strong) NSMutableString *currentText;
 @property (strong) NSMutableDictionary *currentAuthorDictionary;
 @property (strong) SITLGalleryAuthorModel *currentAuthor;
+@property (strong) NSMutableArray *currentItemCategories;
 @property (strong) NSMutableArray *items;
 
 @end
@@ -36,6 +37,16 @@
 -(void)fetchGalleryForDefaultChannelWithCompletion:(void (^)(SITLGalleryModel *, NSError *))completion {
     
     NSURL *url = [NSURL URLWithString:@"https://api.flickr.com/services/feeds/photos_public.gne"];
+    
+    [self fetchGalleryForURL:url withCompletion:^(SITLGalleryModel *gallery, NSError *error) {
+        if(completion) {
+            completion(gallery, error);
+        }
+    }];
+}
+
+-(void)fetchGalleryByTag:(NSString *)tag withCompletion:(void (^)(SITLGalleryModel *, NSError *))completion {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.flickr.com/services/feeds/photos_public.gne?tags=%@", tag]];
     
     [self fetchGalleryForURL:url withCompletion:^(SITLGalleryModel *gallery, NSError *error) {
         if(completion) {
@@ -94,6 +105,7 @@
 
     if([elementName isEqualToString:@"entry"]) {
         self.currentItemDictionary = [NSMutableDictionary dictionary];
+        self.currentItemCategories = [NSMutableArray array];
     } else if(self.currentItemDictionary != nil) {
         if([elementName isEqualToString:@"author"]) {
             self.currentAuthorDictionary = [NSMutableDictionary dictionary];
@@ -108,10 +120,13 @@
     
     if([elementName isEqualToString:@"entry"]) {
         
+        [self.currentItemDictionary setObject:self.currentItemCategories forKey:@"categories"];
+        
         SITLGalleryItemModel *itemModel = [[SITLGalleryItemModel alloc] initWithDictionary:[NSDictionary dictionaryWithDictionary:self.currentItemDictionary] andAuthor:self.currentAuthor];
         
         self.currentItemDictionary = nil;
         self.currentAuthor = nil;
+        self.currentItemCategories = nil;
         
         NSLog(@"MODEL: %@\n%@", itemModel, itemModel.author);
         
@@ -136,6 +151,10 @@
                     [self.currentItemDictionary setObject:[self.currentNodeAttributesDictionary objectForKey:@"href"] forKey:@"temp:link:alternate"];
                 } else if([[self.currentNodeAttributesDictionary objectForKey:@"rel"] isEqualToString:@"enclosure"]) {
                     [self.currentItemDictionary setObject:[self.currentNodeAttributesDictionary objectForKey:@"href"] forKey:@"temp:link:enclosure"];
+                }
+            } else if([elementName isEqualToString:@"category"] && self.currentNodeAttributesDictionary) {
+                if([self.currentNodeAttributesDictionary objectForKey:@"term"] && [[self.currentNodeAttributesDictionary objectForKey:@"term"] isKindOfClass:[NSString class]] && [[self.currentNodeAttributesDictionary objectForKey:@"term"] length] > 0) {
+                    [self.currentItemCategories addObject:[self.currentNodeAttributesDictionary objectForKey:@"term"]];
                 }
             } else if(self.currentText) {
                 [self.currentItemDictionary setObject:self.currentText forKey:elementName];

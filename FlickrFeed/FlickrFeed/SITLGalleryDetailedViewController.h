@@ -15,4 +15,6 @@
 @property (nonatomic, strong) SITLGalleryItemModel *item;
 @property (nonatomic, assign) NSInteger itemIndex;
 
+@property (nonatomic, copy) void (^searchGalleryByTagBlock)(NSString *tag);
+
 @end

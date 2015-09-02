@@ -13,6 +13,7 @@
 @interface SITLGalleryDetailedPageViewController : UIPageViewController
 
 @property (nonatomic, copy) void (^dismissBlock)(void);
+@property (nonatomic, copy) void (^searchGalleryByTagBlock)(NSString *tag);
 
 @property (weak) SITLGalleryModel *gallery;
 @property (assign) NSInteger currentIndex;

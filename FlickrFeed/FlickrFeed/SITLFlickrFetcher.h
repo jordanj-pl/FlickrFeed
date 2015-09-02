@@ -14,6 +14,8 @@
 
 -(void)fetchGalleryForDefaultChannelWithCompletion:(void(^)(SITLGalleryModel *gallery, NSError *error))completion;
 
+-(void)fetchGalleryByTag:(NSString*)tag withCompletion:(void(^)(SITLGalleryModel *gallery, NSError *error))completion;
+
 -(void)fetchImageForItem:(SITLGalleryItemModel*)item withCompletion:(void(^)(UIImage *image))completion;
 
 @end

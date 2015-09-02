@@ -74,8 +74,10 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
 
+    //TODO use settings to mark that the banner has been seen by user and do not show it again.
+    
     if(motion == UIEventSubtypeMotionShake) {
-        [UIView animateWithDuration:3 animations:^{
+        [UIView animateWithDuration:3 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
             self.shakeToReloadBanner.backgroundColor = [UIColor colorWithRed:120.0f green:120.0f blue:200.0f alpha:0.0f];
         } completion:^(BOOL finished) {
             if(finished) {
@@ -100,6 +102,7 @@
 #pragma mark - network interaction
 
 -(void)reload {
+    //TODO replace with user blocking activity indicator in order to prevent action while items are being fetch. Clearly communicate to user that new items are being downloaded, many people do not see the small status bar spinning icon.
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -116,6 +119,27 @@
         }];
     });
 }
+
+-(void)fetchByTag:(NSString*)tag {
+    //TODO replace with user blocking activity indicator in order to prevent action while items are being fetch. Clearly communicate to user that new items are being downloaded, many people do not see the small status bar spinning icon.
+
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.fetcher fetchGalleryByTag:tag withCompletion:^(SITLGalleryModel *gallery, NSError *error) {
+            NSLog(@"XML: %@,\nERROR: %@", gallery, error);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.currentGallery = gallery;
+                
+                [self.collectionView reloadData];
+                
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            });
+        }];
+    });
+}
+
 
 #pragma mark - UICollectionViewDataSource implementation
 
@@ -160,6 +184,13 @@
         [self dismissViewControllerAnimated:YES completion:^{
         }];
     };
+    
+    detailViewController.searchGalleryByTagBlock = ^(NSString *tag) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self fetchByTag:tag];
+        }];
+    };
+
 
     
     SITLGalleryDetailedViewController *detailedViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"GalleryDetailedViewController"];
@@ -168,6 +199,12 @@
     
     detailedViewController.item = selectedItem;
     detailedViewController.itemIndex = indexPath.row;
+    
+    detailedViewController.searchGalleryByTagBlock = ^(NSString *tag) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self fetchByTag:tag];
+        }];
+    };
 
     [detailViewController setViewControllers:@[detailedViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 

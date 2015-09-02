@@ -23,6 +23,7 @@
 @property (strong, readonly) NSURL *webURL;
 
 @property (strong, readonly) SITLGalleryAuthorModel *author;
+@property (strong, readonly) NSArray *categories;
 
 -(instancetype)initWithDictionary:(NSDictionary*)dictionary andAuthor:(SITLGalleryAuthorModel*)author;
 

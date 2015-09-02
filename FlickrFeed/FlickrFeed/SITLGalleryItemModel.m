@@ -29,6 +29,8 @@
         _datePublished = [df dateFromString:[dictionary objectForKey:@"published"]];
         _dateUpdated = [df dateFromString:[dictionary objectForKey:@"updated"]];
         _dateTaken = [df dateFromString:[dictionary objectForKey:@"dc:date.Taken"]];
+        
+        _categories = [dictionary objectForKey:@"categories"];
 
     }
     return self;

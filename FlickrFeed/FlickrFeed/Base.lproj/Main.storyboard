@@ -59,7 +59,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="QRa-cx-pne"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,29 +102,62 @@
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPM-4K-9ia">
+                                <rect key="frame" x="66" y="0.0" width="518" height="25"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="KdE-NB-aPY"/>
+                                </constraints>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXL-1v-gSl">
+                                <rect key="frame" x="484" y="25" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0nY-f1-P1I"/>
+                                    <constraint firstAttribute="width" constant="100" id="Tfi-cK-OzX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" title="#tags">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="expandTags:" destination="OTh-AN-IfS" eventType="touchUpInside" id="1a3-Db-6aw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="C1o-HN-9Bd" firstAttribute="top" secondItem="jYN-03-zG8" secondAttribute="bottom" constant="10" id="0DD-Xt-Rid"/>
                             <constraint firstItem="fqf-eO-Tg0" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" id="2YN-3v-WOa"/>
+                            <constraint firstItem="kXL-1v-gSl" firstAttribute="top" secondItem="sPM-4K-9ia" secondAttribute="bottom" id="2zR-bG-z7f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fqf-eO-Tg0" secondAttribute="trailing" id="3LZ-f3-Cj2"/>
                             <constraint firstItem="fqf-eO-Tg0" firstAttribute="top" secondItem="IZG-SN-tSw" secondAttribute="bottom" constant="10" id="DHK-V6-WH0"/>
                             <constraint firstItem="C1o-HN-9Bd" firstAttribute="top" secondItem="fqf-eO-Tg0" secondAttribute="bottom" constant="100" id="JA6-8d-Ttd"/>
                             <constraint firstItem="znB-9a-YXz" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" constant="-16" id="Mt5-Ok-LlS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kXL-1v-gSl" secondAttribute="trailing" constant="40" id="NXC-Ju-nyA"/>
+                            <constraint firstItem="kXL-1v-gSl" firstAttribute="top" secondItem="BNN-lo-ZqX" secondAttribute="topMargin" id="TVc-aw-ygP"/>
+                            <constraint firstItem="kXL-1v-gSl" firstAttribute="trailing" secondItem="sPM-4K-9ia" secondAttribute="trailing" id="Uog-OF-otm"/>
                             <constraint firstItem="OPo-R9-Tdx" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" id="YzZ-ll-9M9"/>
                             <constraint firstItem="jYN-03-zG8" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" id="ZWu-Ei-XzH"/>
                             <constraint firstItem="C1o-HN-9Bd" firstAttribute="top" secondItem="znB-9a-YXz" secondAttribute="bottom" id="aNG-nD-4NN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sPM-4K-9ia" secondAttribute="trailing" id="aag-FB-9s2"/>
                             <constraint firstItem="jYN-03-zG8" firstAttribute="top" secondItem="fqf-eO-Tg0" secondAttribute="bottom" constant="15" id="cjq-Bt-5cW"/>
                             <constraint firstItem="IZG-SN-tSw" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" id="fQi-cH-LRC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jYN-03-zG8" secondAttribute="trailing" id="flq-Ke-gO7"/>
                             <constraint firstItem="znB-9a-YXz" firstAttribute="top" secondItem="BNN-lo-ZqX" secondAttribute="topMargin" id="gW4-dO-Fvr"/>
+                            <constraint firstItem="sPM-4K-9ia" firstAttribute="top" secondItem="BNN-lo-ZqX" secondAttribute="topMargin" id="kDI-0w-R0H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OPo-R9-Tdx" secondAttribute="trailing" id="kNj-bW-bCX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IZG-SN-tSw" secondAttribute="trailing" id="ke7-jQ-IJu"/>
                             <constraint firstItem="IZG-SN-tSw" firstAttribute="top" secondItem="OPo-R9-Tdx" secondAttribute="bottom" constant="10" id="lrg-6j-Sxc"/>
+                            <constraint firstItem="sPM-4K-9ia" firstAttribute="leading" secondItem="BNN-lo-ZqX" secondAttribute="leadingMargin" constant="50" id="pAd-Ie-1eI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="znB-9a-YXz" secondAttribute="trailing" constant="-16" id="ttw-jl-lwE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="NXC-Ju-nyA"/>
+                                <exclude reference="TVc-aw-ygP"/>
                                 <exclude reference="JA6-8d-Ttd"/>
                             </mask>
                         </variation>
@@ -132,8 +165,12 @@
                     <connections>
                         <outlet property="authorLabel" destination="IZG-SN-tSw" id="KGY-V7-E28"/>
                         <outlet property="dateLabel" destination="fqf-eO-Tg0" id="vEy-wr-Ffs"/>
+                        <outlet property="expandTagsButton" destination="kXL-1v-gSl" id="Kie-WM-4MC"/>
                         <outlet property="imageView" destination="znB-9a-YXz" id="AVo-LE-818"/>
                         <outlet property="openURLButton" destination="jYN-03-zG8" id="Fqy-an-1je"/>
+                        <outlet property="tagsArea" destination="sPM-4K-9ia" id="Ahw-8I-rO3"/>
+                        <outlet property="tagsAreaHeight" destination="KdE-NB-aPY" id="FN4-Hf-TL8"/>
+                        <outlet property="tagsAreaTopPadding" destination="kDI-0w-R0H" id="xOD-D2-S8A"/>
                         <outlet property="titleLabel" destination="OPo-R9-Tdx" id="Ucq-Hm-r8g"/>
                         <outlet property="view" destination="BNN-lo-ZqX" id="kjc-E1-yOL"/>
                     </connections>

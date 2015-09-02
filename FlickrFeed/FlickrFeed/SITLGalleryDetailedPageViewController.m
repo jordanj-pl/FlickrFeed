@@ -20,9 +20,10 @@
     [super viewDidLoad];
     
     UIButton *dismissBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [dismissBtn setFrame:CGRectMake(20, 30, 100, 30)];//TODO add constraints to make it flexible and align to the right
+    [dismissBtn setFrame:CGRectMake(0.0f, 30, 60, 30)];//TODO add constraints to make it flexible and align to the right
     [dismissBtn setTitle:@"close" forState:UIControlStateNormal];
     [dismissBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+    [dismissBtn setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.7f]];
     
     [self.view addSubview: dismissBtn];
     
@@ -60,6 +61,7 @@
         SITLGalleryItemModel *item = self.gallery.items[index];
         detailedViewController.item = item;
         detailedViewController.itemIndex = index;
+        detailedViewController.searchGalleryByTagBlock = self.searchGalleryByTagBlock;
         
         return detailedViewController;
     } else {
@@ -77,6 +79,7 @@
         SITLGalleryItemModel *item = self.gallery.items[index];
         detailedViewController.item = item;
         detailedViewController.itemIndex = index;
+        detailedViewController.searchGalleryByTagBlock = self.searchGalleryByTagBlock;
         
         return detailedViewController;
     } else {

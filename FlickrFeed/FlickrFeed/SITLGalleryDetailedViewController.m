@@ -20,6 +20,13 @@
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UIButton *openURLButton;
 
+@property (nonatomic, weak) IBOutlet UIButton *expandTagsButton;
+@property (nonatomic, assign) BOOL tagsExpanded;
+
+@property (nonatomic, weak) IBOutlet UIView *tagsArea;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tagsAreaHeight;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tagsAreaTopPadding;
+
 @end
 
 @implementation SITLGalleryDetailedViewController
@@ -67,6 +74,31 @@
     
     [self.openURLButton setTitle:[self.item.webURL absoluteString] forState:UIControlStateNormal];
     self.openURLButton.hidden = ![[UIApplication sharedApplication] canOpenURL:self.item.webURL];
+
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+
+    int categoryIndex = 0;
+    for (NSString *categoryName in self.item.categories) {
+        UIButton *tagBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        tagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [tagBtn setTitle:[NSString stringWithFormat:@"#%@", categoryName] forState:UIControlStateNormal];
+        [tagBtn setFrame:CGRectMake(5.0f, categoryIndex*25.0f + statusBarFrame.size.height, 200.0f, 21.0f)];//TODO add constraints to dynamically adjust button width
+        tagBtn.tag = 990000 + categoryIndex;
+        [tagBtn addTarget:self action:@selector(tagSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.tagsArea addSubview:tagBtn];
+        categoryIndex++;
+    }
+    
+    if([self.item.categories count] > 0) {
+        self.expandTagsButton.hidden = NO;
+
+        self.tagsAreaHeight.constant = [self.item.categories count] * 25.0f + statusBarFrame.size.height;
+    } else {
+        self.tagsAreaHeight.constant = 0.0f;
+    }
+    
+    self.tagsAreaTopPadding.constant = [self.item.categories count] * 25.0f * -1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,8 +116,56 @@
 }
 */
 
+-(void)tagSelected:(id)sender {
+    
+    UIButton *btn = sender;
+
+    self.tagsAreaTopPadding.constant = [self.item.categories count] * 25.0f * -1;
+    [self.tagsArea setNeedsUpdateConstraints];
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.tagsArea layoutIfNeeded];
+        [self.expandTagsButton layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if(finished) {
+            self.tagsExpanded = NO;
+            self.searchGalleryByTagBlock(self.item.categories[(btn.tag - 990000)]);
+        }
+    }];
+}
+
 -(IBAction)openURL:(id)sender {
     [[UIApplication sharedApplication] openURL:self.item.webURL];
+}
+
+-(IBAction)expandTags:(id)sender {
+
+    if(self.tagsExpanded) {
+        self.tagsAreaTopPadding.constant = [self.item.categories count] * 25.0f * -1;
+        [self.tagsArea setNeedsUpdateConstraints];
+        
+        [UIView animateWithDuration:1.5f delay:0.0f usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:0 animations:^{
+            [self.tagsArea layoutIfNeeded];
+            [self.expandTagsButton layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if(finished) {
+                self.tagsExpanded = NO;
+            }
+        }];
+    } else {
+        self.tagsAreaTopPadding.constant = 0.0f;
+        [self.tagsArea setNeedsUpdateConstraints];
+
+        [UIView animateWithDuration:1.5f delay:0.0f usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:0 animations:^{
+            [self.tagsArea layoutIfNeeded];
+            [self.expandTagsButton layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if(finished) {
+                self.tagsExpanded = YES;
+            }
+        }];
+    }
+    
 }
 
 @end
