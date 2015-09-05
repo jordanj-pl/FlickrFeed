@@ -40,7 +40,7 @@
                         </collectionViewFlowLayout>
                         <cells/>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="SearchBarCell" id="0BJ-b6-6ZC">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="#tag" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mup-Rg-vXI">
@@ -48,7 +48,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="qxO-Y5-XaI"/>
                                     </constraints>
-                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                                     <scopeButtonTitles>
                                         <string>Title</string>
                                         <string>Title</string>
@@ -105,7 +105,7 @@
                                     <constraint firstAttribute="height" constant="21" id="QRa-cx-pne"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
@@ -117,7 +117,7 @@
                                     <constraint firstAttribute="width" constant="160" id="wkT-JN-xrZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
@@ -142,7 +142,7 @@
                                     <constraint firstAttribute="height" constant="21" id="3hj-gb-8ca"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="1" height="1"/>
@@ -165,7 +165,7 @@
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="#tags">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="expandTags:" destination="OTh-AN-IfS" eventType="touchUpInside" id="1a3-Db-6aw"/>

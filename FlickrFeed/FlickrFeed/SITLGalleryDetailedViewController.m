@@ -46,9 +46,11 @@
     if([imgStore imageForKey:self.item.flickrId]) {
         self.imageView.image = [imgStore imageForKey:self.item.flickrId];
     } else {
-
-        if([self.parentViewController.presentingViewController isKindOfClass:[SITLGalleryViewController class]]) {
-            SITLGalleryViewController *gvc = (SITLGalleryViewController*)self.parentViewController.presentingViewController;
+        
+        UINavigationController *presentingVC = (UINavigationController*)self.parentViewController.presentingViewController;
+        
+        if([presentingVC.viewControllers[0] isKindOfClass:[SITLGalleryViewController class]]) {
+            SITLGalleryViewController *gvc = (SITLGalleryViewController*)presentingVC.viewControllers[0];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlickrFeed/SITLGalleryDetailedViewController.m"
-            timestampString = "462851093.885185"
+            timestampString = "463149189.249947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
